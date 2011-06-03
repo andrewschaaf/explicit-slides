@@ -6,7 +6,6 @@ express = require 'express'
 {compileOnRequest} = require './util'
 
 
-
 class Server
   
   constructor: () ->
@@ -20,13 +19,16 @@ class Server
     
     compileOnRequest app, "#{__dirname}/public"
     
-    app.get '/', (req, res, next) ->
-      res.render 'index'
+    app.get '/dev', (req, res, next) ->
+      res.render 'dev'
     
     port = 9000
     app.listen port, () ->
       console.log "Listening on #{port}"
 
+
+if not module.parent
+  new Server()
 
 module.exports =
   Server: Server
